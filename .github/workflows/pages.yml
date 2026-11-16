@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check data files load
+        run: |
+          node -e "global.window={};const fs=require('fs');const files=fs.readFileSync('index.html','utf8').match(/data\/[a-z0-9-]+\.js/g);files.forEach(f=>require('./'+f));let n=0;for(const c of Object.values(window.CERTS)){const ids=new Set();for(const q of c.questions){if(ids.has(q.id)||q.answer.some(a=>a<0||a>=q.choices.length))throw new Error('bad question '+q.id);ids.add(q.id);n++}}console.log('questions',n)"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
