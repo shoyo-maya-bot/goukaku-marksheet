@@ -3,6 +3,7 @@
 AWS 認定（SAA・AI Practitioner・Generative AI Developer – Professional）と応用情報技術者試験の学習サイトです。
 
 - 入門レッスン（前提知識ゼロから）・要点ノート・用語集・ひっかけ対策
+- 1段階ずつ組み上がる図解（SAA 34枚）
 - 本番形式の解説付き問題（SAA / 応用情報 310問、AI系 255問）
 - 解いたことのない問題だけで出す時間制限つき模擬試験
 
@@ -16,6 +17,7 @@ AWS 認定（SAA・AI Practitioner・Generative AI Developer – Professional）
 | `data/<資格>.js` | 試験情報・要点ノート・ひっかけ・基本問題 |
 | `data/<資格>-intro.js` | 入門レッスンと用語集 |
 | `data/<資格>-b*.js` | 追加問題 |
+| `data/saa-figs*.js` | 図解（SVG と段階ごとの説明） |
 
 `main` に push すると GitHub Actions がデータを検証して GitHub Pages に公開します。
 
